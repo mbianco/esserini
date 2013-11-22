@@ -9,3 +9,4 @@ install_manifest.txt
 build/
 /compile_commands.json
 nbproject/
+/statdata.dat
