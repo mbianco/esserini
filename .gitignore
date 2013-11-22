@@ -8,3 +8,4 @@ install_manifest.txt
 *.o
 build/
 /compile_commands.json
+nbproject/
