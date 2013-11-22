@@ -7,3 +7,4 @@ install_manifest.txt
 *.exe
 *.o
 build/
+/compile_commands.json
