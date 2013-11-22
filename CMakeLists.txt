@@ -32,7 +32,7 @@ if( Boost_FOUND )
   include_directories( ${Boost_INCLUDE_DIR} )
 endif()
 
-include_directories( . ${Boost_INCLUDE_DIR} )
+include_directories( src ${Boost_INCLUDE_DIR} )
 link_directories(${Boost_LIBRARY_DIRS})
 
 ### Library
@@ -40,6 +40,6 @@ set(EXECUTABLE_OUTPUT_PATH "build")
 
 ### Executables
 
-add_executable( esserini main.cc goodness.cc instructions.cc monster.cc mondo.cc)
+add_executable( esserini src/main.cc src/goodness.cc src/instructions.cc src/monster.cc src/mondo.cc)
 
 target_link_libraries (esserini boost_program_options) 
