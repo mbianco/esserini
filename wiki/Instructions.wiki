@@ -1,0 +1,46 @@
+#summary Description of instruction formats and use
+
+= Introduction =
+
+Add your content here.
+
+
+= Details =
+Each instruction is made of 21bits words, stored in 32 bits integers. One instruction is coded as
+{{{
+  31 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 09 08 07 06 05 04 03 02 01 00
+ |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+ | kind|  region   | threshold |    ALLACTION    |o1|o2|   value   |             goodness
+                               |   move    | act | value not food  |
+}}}
+
+The `kind` of the instruction refer to what parameter will be evaluated by the being itself. The parameters are
+
+  * `HUNGRY`: hungryness
+  * `HORMONS`: the will to mate
+  * `ENERGY`: the amount of energy
+  * `WEIGHT`: the weight
+
+The `region` is one of the regions showed, with their identifiers in the following diagram
+{{{
+	|----|------------------------|----|
+	|    |  4 |  5 |  6 |  7 |  8 |    |
+	|    |----|----|----|----|----|    |
+	|    |    |  1 |  2 |  3 |    |    |
+	| 14 |    -----|----|-----    | 15 |
+	|    |    9    |  0 |    10   |    |
+	|    |------------------------|    |
+	|    |    11   | 13 |    12   |    |
+	|    |         |    |         |    |
+	------------------------------------
+}}}
+
+The `Threshold` is a value against with the quantity in the parameter indicated by the `kind` is evaluated.
+
+The operators `o1` and `o2` are one of the following
+  * LT less or equal to
+  * GT greater or equal to
+
+`value` is the value of the 
+
+*Note:* If EQ and NE are used it is very hard to get something happening, since it looks like having too many options is dangerous for surviving. Need to check this. To make use of them, it is sufficient to us get_op instead of get_op2 in all instances. Need to make this choice easier.

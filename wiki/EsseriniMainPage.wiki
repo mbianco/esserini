@@ -1,0 +1,34 @@
+#summary Initial page of the esserini project
+
+= Introduction =
+
+Esserini is a program for simulating life based on the idea that living _beings_ (this is how the simulated individuals are referred to) answer to the most pressing instincts. The instincts are measured by the number of _hints_ pushing for one action or another. The idea is that life needs an environment in which to develop, and this environment has clear behaviour rules, such as, a energy conservation law, a rate at which food develop from manure, etc. Beings interact with the environment and modify it. The modification impact the resources available.
+
+Beings interact with each other, too. They can fight, releasing energy to the system, and possibly dying, and they can mate, thus absorbing energy from the system to release it to the offspring.
+
+The world is made by a (cyclic) grid. Each grid have food and of manure. Food grows out of manure, while manure is made by food dying, beings dying, and beings pooping.
+
+Each being sees a portion of the world, in a anisotropic way. If the being is in cell 0 looking up, then the information about the surrounding is given for the regions highlighted by the following figure:
+{{{
+	|----|------------------------|----|
+	|    |  4 |  5 |  6 |  7 |  8 |    |
+	|    |----|----|----|----|----|    |
+	|    |    |  1 |  2 |  3 |    |    |
+	| 14 |    -----|----|-----    | 15 |
+	|    |    9    |  0 |    10   |    |
+	|    |------------------------|    |
+	|    |    11   | 13 |    12   |    |
+	|    |         |    |         |    |
+	------------------------------------
+}}}
+The information about cells, available to the beings, are about the presence of another being, the sex of it, the amount of food, etc. For regions covering more than one cell the information is the average of the cells forming the region.
+
+The beings have some genetic code and some learned code. The codes are list of instructions. The details of the instructions is found in [Instructions]. Each instruction is made of three parts: 1) a predicate on the being itself, 2) a predicate on the environment, and 3) an action. If both the predicates (_and_) are satisfied, the action is ebaled. Since all instructions are evaluated, the action that have been enabled more times will be actually executed by the being. Other that a _genetic_ code, there is a _learnt_. An instruction is learnt (and stored several times to increase its value according to a parameter) if it was successful, that is, led to being to _feel_ better (less hormons, less hunger, etc.). Offspring inherits from parents the genetic code (50% from father and 50% from mother), and also receive the learnt code, assuming the beings can teach their children. Inheritance can mutate the instructions, thus allowing the raise of unseen behaviours. The mutation rate is a customizable parameter, as many others.
+
+==Questions and Considerations that can be addressed by the program==
+
+  # At the moment the code tries to implement a perfect [conservation law]. It is questionable if in a world like this evolution is necessary in the first place. When the conservation law will be proven to work, it will be interesting to add an entropy concept through the introduction of free energy. In this case evolution should become more important but the adjustment of the rates of entropy and evolution will be hard.
+  # As can be seen in [Instructions], the possibilities for the beings are quite a lot. The question is then if it is possible to observe some evolution. One way to understand if there is evolution is to check if the [Goodness] (a name dictated by my sense of humour) increase during execution. The problem of defining what is good and what is not, it however not trivial, and there are already two ways to measure goodness. Another possible way is to compare the beings against a random behavior, such as selecting a random action at each cycle and see if the population sustain itself.
+  # If the behavior is not random, there should be a minimum size of the code for which it is so. What is the value, and how is it related to the other parameters of the program?
+  # Non-random behavior would lead to more efficient beings in the long run. How long is it? If we start with instruction whit goodness not less than a given threshold are we going to see some better behavior from the start? Is it like jumping ahead in time?
+  # Given that there are 2M possible instructions, beings can have codes smaller than 2M instructions, and that there are many beings, it is plausible that, even in absence of mutations, all instructions are found in the system. How well do the instructions mix? Is it possible that, after some time the goodness of beings improve even though the set of instruction do not grow during the simulation?
